@@ -1,0 +1,17 @@
+# Información del entorno
+country: "colombia"
+env: "dev"
+project_name: "cvu" 
+resource_group: "cvumigracion"
+
+# Información de la cuenta y región
+azure:
+  subscription_id: "3e481f53-188b-4570-90e5-1fedb18afe00"
+  tenant_id: "ea7a4953-7a82-424a-a984-2170094160d7"
+  region: "centralus"
+  global_region: "global"
+  resource_group: "cvumigracion"  # Usamos el nombre del proyecto
+
+vm_admin:
+  username: "infraadmin"
+  ssh_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDZLA6EG5sJ9UxN7UgntvhvwHO2I2KIF6Rz7oqqUMnL6cy8R2moWv1el6ehxuk88PI1rmSlIvSb6YRKlN2dut4/h458oaLEswOWwHpUjTethpGETAmIWAvXulRoO0xPXSwpoEigLp7QMTtMkh5YUNl/DJWFZBsYKCFL/uB8kW36/sANAQyR2l47yMdPJvwaX3cPWDcRqOMfdrFx6N+/WUw/DmKvhy5gWpeQJeGl+fLFs1GFoahNFMXIijMDJQOwidBkfwCTa/HI/vxXXDiKkVuO/4DWNzrmWYvAHqrH7/n1o71goFH/KiokH09V01nJmchL9oMunBwqQPgDciuZkr93uzlJ1ixyopJF0sTWKIsnCs+YHR0FDWWthK4wuT4FPlHu2/WHP+HrVtvTM7wiGMYrs7hjrjY0tnCJWnlijBDd/Cgr4fXTSfk1F0wsPZhuQTrQqURa97YY90SILiNztYQMA6/L0/FFIFVOZeBheTZ9bPuED80Gu8uvULLGONKTGvMjHeMrZiwitl+EHdr52jgtJsaGJ50iZZqB3UT5EQmrfhOMXgEGkHstOs845t/fVB3bfh8k3mMOys+sFPD9z5drMkqtPi4C2vHgwhFr4Qf8MNj461SL02R5Nf1KGO7A4hIJmN2s8gXftuY4tGptAtRTOOFmNiUwRmUaAcxVjYlLXQ=="

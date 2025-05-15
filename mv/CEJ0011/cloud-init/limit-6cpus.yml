@@ -1,0 +1,9 @@
+#cloud-config
+runcmd:
+  - echo 'Limiting CPUs to 0-5...'
+  - systemctl set-property --runtime system.slice AllowedCPUs=0-5
+  - systemctl set-property --runtime user.slice AllowedCPUs=0-5
+  - mkdir -p /etc/systemd/system.conf.d
+  - echo -e "[Slice]\\nAllowedCPUs=0-5" > /etc/systemd/system.conf.d/cpu-limit.conf
+  - mkdir -p /etc/systemd/user.conf.d
+  - echo -e "[Slice]\\nAllowedCPUs=0-5" > /etc/systemd/user.conf.d/cpu-limit.conf
