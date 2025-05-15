@@ -12,7 +12,7 @@ dependency "management" {
 }
 
 terraform {
-  source = "git::https://Cvu1:7hEKUBJiemEGFgQxuwaX6InsHXagCx2VhXOZ886JiBEoyfTfeeN6JQQJ99BEACAAAAAX0UalAAASAZDO2HkO@dev.azure.com/Cvu1/Cvu/_git/ModulesCvu.infrastructure.IaaS//mv/CEJ0011?ref=CEJ0011-v0.0.6"
+  source = "git::_git/ModulesCvu.infrastructure.IaaS//mv/CEJ0011?ref=CEJ0011-v0.0.6"
 }
 
 

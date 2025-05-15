@@ -6,7 +6,7 @@ locals {
 
 
 terraform {
-  source = "git::https://Cvu1:7hEKUBJiemEGFgQxuwaX6InsHXagCx2VhXOZ886JiBEoyfTfeeN6JQQJ99BEACAAAAAX0UalAAASAZDO2HkO@dev.azure.com/Cvu1/Cvu/_git/ModulesCvu.infrastructure.IaaS//governance/location?ref=location-v0.0.2"
+  source = "git::_git/ModulesCvu.infrastructure.IaaS//governance/location?ref=location-v0.0.2"
 }
 
 

@@ -4,7 +4,7 @@ locals {
 
 
 terraform {
-  source = "git::https://Cvu1:7hEKUBJiemEGFgQxuwaX6InsHXagCx2VhXOZ886JiBEoyfTfeeN6JQQJ99BEACAAAAAX0UalAAASAZDO2HkO@dev.azure.com/Cvu1/Cvu/_git/ModulesCvu.infrastructure.IaaS//resource_group?ref=resource_group-v0.0.1"
+  source = "git::https://github.com/juancamilouni/Modules.infrastructure.git//resource_group?ref=resource_group-v0.0.2"
 }
 
 
