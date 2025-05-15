@@ -1,10 +1,10 @@
 locals {
-  common_vars = yamldecode(file("../../common_vars.yaml"))
+  common_vars = yamldecode(file("../common_vars.yaml"))
 }
 
 
 terraform {
-  source = "git::https://github.com/juancamilouni/Modules.infrastructure.git//resource_group?ref=resource_group-v0.0.2"
+  source = "git::https://github.com/juancamilouni/Modules.infrastructure.git//resource_group?ref=resource_group-v0.0.1"
 }
 
 

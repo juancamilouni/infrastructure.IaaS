@@ -1,7 +1,7 @@
 # Información del entorno
 country: "colombia"
 env: "dev"
-project_name: "cvu" 
+project_name: "cvus" 
 resource_group: "cvumigracion"
 
 # Información de la cuenta y región
