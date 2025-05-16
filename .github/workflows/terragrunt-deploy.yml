@@ -1,63 +1,32 @@
-name: Crear tag aprobado y lanzar despliegue
+name: Despliegue de módulo Terragrunt
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types: [deploy-module]
 
 jobs:
-  tag-and-notify:
+  deploy:
+    name: Ejecutar Terragrunt
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
-      - name: Detectar último módulo modificado
-        id: detectar
+      - name: Instalar Terragrunt
         run: |
-          git fetch --depth=2 origin ${{ github.ref_name }} || true
-          BASE_SHA=$(git rev-parse HEAD^ 2>/dev/null || echo "")
-          HEAD_SHA=$(git rev-parse HEAD)
-          echo "BASE_SHA=$BASE_SHA"
-          echo "HEAD_SHA=$HEAD_SHA"
-          if [ -z "$BASE_SHA" ]; then
-            echo "No se pudo determinar el commit base. Abortando."
-            exit 1
-          fi
-          MODULO=$(git diff --name-only $BASE_SHA $HEAD_SHA | cut -d/ -f1 | grep -v '^\.github$' | head -n1)
-          if [ -z "$MODULO" ]; then
-            echo "No se detectó ningún módulo modificado."
-            exit 1
-          fi
-          echo "Último módulo detectado: $MODULO"
-          echo "modulo=$MODULO" >> $GITHUB_OUTPUT
+          curl -sL https://github.com/gruntwork-io/terragrunt/releases/latest/download/terragrunt_linux_amd64 -o terragrunt
+          chmod +x terragrunt
+          sudo mv terragrunt /usr/local/bin/
 
-      - name: Mostrar variables para depuración
+      - name: Mostrar módulo recibido
         run: |
-          echo " Repositorio: ${{ github.repository }}"
-          echo "Tag propuesto: ${{ steps.detectar.outputs.modulo }}-v0.0.${{ github.run_number }}"
+          echo "📦 Módulo recibido: ${{ github.event.client_payload.module }}"
+          echo "🔖 Versión: ${{ github.event.client_payload.version }}"
 
-      - name: Configurar Git
+      - name: Inicializar y aplicar con Terragrunt
+        working-directory: ${{ github.event.client_payload.module }}
         run: |
-          git config user.name "ci-bot"
-          git config user.email "ci-bot@example.com"
-
-      - name: Crear y subir tag
-        env:
-          GH_TOKEN: ${{ secrets.GH_PUSH_TOKEN }}
-        run: |
-          VERSION="${{ steps.detectar.outputs.modulo }}-v0.0.${{ github.run_number }}"
-          git tag $VERSION
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
-          git remote -v
-          git push origin $VERSION
-          echo "Tag creado: $VERSION"
-          echo "version=$VERSION" >> $GITHUB_ENV
-
-      - name: Notificar a Terragrunt
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.PAT_TERRAGRUNT }}
-          repository: juancamilouni/terragrunt-infra
-          event-type: deploy-module
-          client-payload: '{"module": "${{ steps.detectar.outputs.modulo }}", "version": "${{ env.version }}"}'
+          terragrunt init
+          terragrunt plan -out=planfile
+          terragrunt apply -auto-approve planfile
