@@ -26,7 +26,7 @@ jobs:
           fi
           MODULO=$(git diff --name-only $BASE_SHA $HEAD_SHA | cut -d/ -f1 | grep -v '^\.github$' | head -n1)
           if [ -z "$MODULO" ]; then
-            echo "❌ No se detectó ningún módulo modificado."
+            echo "No se detectó ningún módulo modificado."
             exit 1
           fi
           echo "Último módulo detectado: $MODULO"
@@ -34,8 +34,8 @@ jobs:
 
       - name: Mostrar variables para depuración
         run: |
-          echo "📦 Repositorio: ${{ github.repository }}"
-          echo "🔖 Tag propuesto: ${{ steps.detectar.outputs.modulo }}-v0.0.${{ github.run_number }}"
+          echo " Repositorio: ${{ github.repository }}"
+          echo "Tag propuesto: ${{ steps.detectar.outputs.modulo }}-v0.0.${{ github.run_number }}"
 
       - name: Configurar Git
         run: |
